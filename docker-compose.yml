@@ -1,0 +1,46 @@
+networks:
+  printer_net:
+    ipam:
+      config:
+        - subnet: 192.168.124.0/24
+
+services:
+  mongo:
+    image: mongo:4.2.0
+    restart: always
+    volumes: 
+    - ./bdd/mongo_data:/data/db
+    env_file:
+    - ./variables.env
+    networks:
+      printer_net:
+        ipv4_address: 192.168.124.11
+  mongo_express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+    - "9070:8081"
+    env_file:
+    - ./variables.env
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+    networks:
+      printer_net:
+        ipv4_address: 192.168.124.12
+    links:
+    - mongo
+  ws:
+    image: printer_ws:latest
+    build:
+      context: ./ws/
+      dockerfile: ./ws.dockerfile
+    restart: always
+    ports:
+    - 8085:5055
+    env_file:
+      - variables.env
+    networks:
+      printer_net:
+        ipv4_address: 192.168.124.13
+    links:
+    - mongo

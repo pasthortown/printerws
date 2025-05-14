@@ -1,0 +1,115 @@
+{
+  "info": {
+    "_postman_id": "b82e1b95-cd0b-4a4e-a089-202505140000",
+    "name": "Print Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "url",
+      "value": "http://localhost:5055"
+    }
+  ],
+  "item": [
+    {
+      "name": "Impresoras - Crear",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ip\": \"192.168.1.100\"\n}"
+        },
+        "url": {
+          "raw": "{{url}}/impresoras",
+          "host": ["{{url}}"],
+          "path": ["impresoras"]
+        }
+      }
+    },
+    {
+      "name": "Impresoras - Listar",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/impresoras",
+          "host": ["{{url}}"],
+          "path": ["impresoras"]
+        }
+      }
+    },
+    {
+      "name": "Impresoras - Actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"ip\": \"192.168.1.101\"\n}"
+        },
+        "url": {
+          "raw": "{{url}}/impresoras",
+          "host": ["{{url}}"],
+          "path": ["impresoras"]
+        }
+      }
+    },
+    {
+      "name": "Impresoras - Eliminar",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1\n}"
+        },
+        "url": {
+          "raw": "{{url}}/impresoras",
+          "host": ["{{url}}"],
+          "path": ["impresoras"]
+        }
+      }
+    },
+    {
+      "name": "Ordenes - Crear",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"documento_html\": \"<p>Prueba de impresión</p>\",\n  \"ip\": \"192.168.1.100\"\n}"
+        },
+        "url": {
+          "raw": "{{url}}/print_order",
+          "host": ["{{url}}"],
+          "path": ["print_order"]
+        }
+      }
+    },
+    {
+      "name": "Ordenes - Obtener por IP",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/print_order/192.168.1.100",
+          "host": ["{{url}}"],
+          "path": ["print_order", "192.168.1.100"]
+        }
+      }
+    },
+    {
+      "name": "Ordenes - Cambiar estado",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/print_order/1/true",
+          "host": ["{{url}}"],
+          "path": ["print_order", "1", "true"]
+        }
+      }
+    }
+  ]
+}
