@@ -45,6 +45,18 @@
       }
     },
     {
+      "name": "Impresoras - Obtener por IP",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/impresoras/192.168.1.100",
+          "host": ["{{url}}"],
+          "path": ["impresoras", "192.168.1.100"]
+        }
+      }
+    },
+    {
       "name": "Impresoras - Actualizar",
       "request": {
         "method": "PUT",
