@@ -43,7 +43,8 @@ class ImpresorasHandler(tornado.web.RequestHandler):
             new_id = get_next_id("impresoras")
             db.impresoras.insert_one({
                 "id": new_id,
-                "ip": data["ip"]
+                "ip": data["ip"],
+                "nombre": data["nombre"]
             })
             self.write(json.dumps({"id": new_id}))
         except Exception as e:
@@ -53,7 +54,13 @@ class ImpresorasHandler(tornado.web.RequestHandler):
     def put(self):
         try:
             data = json.loads(self.request.body)
-            db.impresoras.update_one({"id": data["id"]}, {"$set": {"ip": data["ip"]}})
+            update_data = {}
+            if "ip" in data:
+                update_data["ip"] = data["ip"]
+            if "nombre" in data:
+                update_data["nombre"] = data["nombre"]
+
+            db.impresoras.update_one({"id": data["id"]}, {"$set": update_data})
             self.write(json.dumps({"status": "updated"}))
         except Exception as e:
             self.set_status(400)

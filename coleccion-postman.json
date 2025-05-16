@@ -15,10 +15,15 @@
       "name": "Impresoras - Crear",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"ip\": \"192.168.1.100\"\n}"
+          "raw": "{\n  \"ip\": \"192.168.1.100\",\n  \"nombre\": \"Impresora Cocina\"\n}"
         },
         "url": {
           "raw": "{{url}}/impresoras",
@@ -43,10 +48,15 @@
       "name": "Impresoras - Actualizar",
       "request": {
         "method": "PUT",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"id\": 1,\n  \"ip\": \"192.168.1.101\"\n}"
+          "raw": "{\n  \"id\": 1,\n  \"ip\": \"192.168.1.101\",\n  \"nombre\": \"Impresora Caja\"\n}"
         },
         "url": {
           "raw": "{{url}}/impresoras",
@@ -59,7 +69,12 @@
       "name": "Impresoras - Eliminar",
       "request": {
         "method": "DELETE",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n  \"id\": 1\n}"
@@ -75,7 +90,12 @@
       "name": "Ordenes - Crear",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n  \"documento_html\": \"<p>Prueba de impresión</p>\",\n  \"ip\": \"192.168.1.100\"\n}"
