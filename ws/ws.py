@@ -22,6 +22,27 @@ def get_next_id(collection_name):
     )
     return counter["seq"]
 
+class ImpresoraPorIPHandler(tornado.web.RequestHandler):
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Headers', '*')
+        self.set_header('Access-Control-Allow-Methods', '*')
+
+    def options(self, ip):
+        pass
+
+    def get(self, ip):
+        try:
+            impresora = db.impresoras.find_one({"ip": ip})
+            if impresora:
+                impresora.pop('_id', None)
+                self.write(json.dumps(impresora))
+            else:
+                self.set_status(404)
+                self.write(json.dumps({"error": "Impresora no encontrada"}))
+        except Exception as e:
+            self.set_status(400)
+            self.write(json.dumps({"error": str(e)}))
 class ImpresorasHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
         self.set_header('Access-Control-Allow-Origin', '*')
@@ -121,6 +142,7 @@ class PrintOrderHandler(tornado.web.RequestHandler):
 def make_app():
     return tornado.web.Application([
         (r"/impresoras", ImpresorasHandler),
+        (r"/impresoras/([^/]+)", ImpresoraPorIPHandler),
         (r"/print_order", PrintOrderHandler),
         (r"/print_order/([^/]+)", PrintOrderHandler),
         (r"/print_order/([^/]+)/([^/]+)", PrintOrderHandler),
